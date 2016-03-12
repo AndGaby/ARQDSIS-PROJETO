@@ -47,13 +47,14 @@ public class Saque extends Movimento {
 		notifyObservers();
 	}
 
-	public void fazerSaque(double valorSacar){
+	public boolean fazerSaque(double valorSacar){
 		ContaDAO contaDAO = new ContaDAO();
 		SaqueTO saqueTO = new SaqueTO();
 		ContaTO contaTO = contaDAO.selectSaldo(getConta());
 
 		double saldoAtual = contaTO.getSaldo();
-
+		boolean teste; //variavel para teste no junit
+		
 		if(saldoAtual >= valorSacar){
 			dispenser.contarNotas(valorSacar);
 
@@ -79,9 +80,12 @@ public class Saque extends Movimento {
 			contaTODestino.setNumConta(getConta());
 
 			geraMovimento(contaTO, movimentoTO, contaTODestino, "Debito em Conta corrente");
+			teste = true;
 		}
 		else{
 			JOptionPane.showMessageDialog(null, "Saldo insuficiente para saque");
+			teste = false;
 		}
+		return teste;
 	}
 }
