@@ -12,7 +12,7 @@ public class ConnectionFactory {
 			throw new RuntimeException(e);     
 		}  
 	}  
-	public Connection connection() throws SQLException{       
+	public static Connection connection() throws SQLException{       
 		return DriverManager.getConnection ("jdbc:mysql://localhost/projeto?user=root" );   
 	}
 }
