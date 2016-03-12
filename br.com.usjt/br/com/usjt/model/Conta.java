@@ -64,11 +64,13 @@ public class Conta extends Observable{
 		return String.valueOf(contaTO.getSaldo());
 	}
 
-	public void imprimir() throws IOException{
+	public boolean imprimir() throws IOException{
 		SimpleDateFormat formatoData = new SimpleDateFormat("dd-MM-yyyy" + " HH.mm.ss");//cria um tipo date para colocar a data de que foi criado o arquivo no nome do arquivo 
 		Calendar data = Calendar.getInstance();
 
 		File arquivo;
+		
+		boolean teste;//variavel para que funcione o teste unitarios 
 		
 		String nomeArq = "Saldo da conta " + getNumConta() + " do dia e hora " + formatoData.format(data.getTime()) + ".txt";
 		//criando arquivo para preencher com o extrato 
@@ -77,9 +79,11 @@ public class Conta extends Observable{
 			arquivo = new File(nomeArq);
 			arquivo.createNewFile();
 			JOptionPane.showMessageDialog(null,"Arquivo '"+ nomeArq + "' criado!","Arquivo",1);
+			teste = true;
 		}
 		//mostrando erro em caso se nao for possivel gerar arquivo
 		catch(Exception erro){
+			teste = false;
 			JOptionPane.showMessageDialog(null,"Arquivo nao pode ser gerado!","Erro",0);
 		}
 
@@ -95,5 +99,7 @@ public class Conta extends Observable{
 		+ newLine + "saldo: " + getSaldo();
 
 		gravarArq.format("\n" + saldoDoDia);
+		
+		return teste;
 	}
 }
