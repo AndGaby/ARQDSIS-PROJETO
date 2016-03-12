@@ -32,7 +32,7 @@ import br.com.usjt.model.Acesso;
 
 public class TelaEntrarComCodigo{
 	private JButton btnLimpar, btnCancelar, btnOk, btnZero, btnUm, btnDois, btnTres, btnQuatro, btnCinco, btnSeis,
-						btnSete, btnOito, btnNove;
+	btnSete, btnOito, btnNove;
 	private JLabel lblEntreComO;
 	private JPasswordField passwordField;
 	private ResourceBundle resourseBundle;
@@ -42,19 +42,19 @@ public class TelaEntrarComCodigo{
 	private JFrame frame;
 
 	public TelaEntrarComCodigo() {
-		
+
 
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 300);
 		frame.setLayout(new BorderLayout());	
 		frame.setResizable(false);
 		JPanel panelBotoes = new JPanel();
-		
+
 		JPanel layout = new JPanel();//cria um pane para serem inseridos os componentes
 
 
 		layout.setLayout(new GridBagLayout());//avisa ao pane que ele recebera um GridBadgeLayout
-		
+
 		layout.setLayout(new GridBagLayout());//avisa ao pane que ele recebera um GridBadgeLayout
 		layout.setBackground(Color.white);//coloca o fundo da tela na co branca
 		GridBagConstraints grid = new GridBagConstraints();//cria um gridBagLayout que funciona como se fosse uma tabela, linha e coluna
@@ -76,7 +76,7 @@ public class TelaEntrarComCodigo{
 		btnSete = new JButton("7");
 		btnOito = new JButton("8");
 		btnNove = new JButton("9");
-	
+
 		passwordField = new JPasswordField(3);
 
 		grid.weightx = 2;//separa as linhas  
@@ -97,16 +97,16 @@ public class TelaEntrarComCodigo{
 		grid.gridx = 5;//clouna
 		grid.gridy = 6;//linha
 		layout.add(btnZero, grid);//aciciona a botao em forma de grid na Container
-		
-		
+
+
 		grid.gridx = 4;//clouna
 		grid.gridy = 3;//linha
 		layout.add(btnUm, grid);//aciciona a botao em forma de grid na Container
-		
+
 		grid.gridx = 5;//clouna
 		grid.gridy = 3;//linha
 		layout.add(btnDois, grid);//aciciona a botao em forma de grid na Container
-		
+
 		grid.gridx = 6;//clouna
 		grid.gridy = 3;//linha
 		layout.add(btnTres, grid);//aciciona a botao em forma de grid na Container
@@ -114,19 +114,19 @@ public class TelaEntrarComCodigo{
 		grid.gridx = 4;//clouna
 		grid.gridy = 4;//linha
 		layout.add(btnQuatro, grid);//aciciona a botao em forma de grid na Container
-		
+
 		grid.gridx = 5;//clouna
 		grid.gridy = 4;//linha
 		layout.add(btnCinco, grid);//aciciona a botao em forma de grid na Container
-		
+
 		grid.gridx = 6;//clouna
 		grid.gridy = 4;//linha
 		layout.add(btnSeis, grid);//aciciona a botao em forma de grid na Container
-		
+
 		grid.gridx = 4;//clouna
 		grid.gridy = 5;//linha
 		layout.add(btnSete, grid);//aciciona a botao em forma de grid na Container
-		
+
 		grid.gridx = 5;//clouna
 		grid.gridy = 5;//linha
 		layout.add(btnOito, grid);//aciciona a botao em forma de grid na Container
@@ -136,7 +136,7 @@ public class TelaEntrarComCodigo{
 		layout.add(btnNove, grid);//aciciona a botao em forma de grid na Container
 
 		passwordField.setEditable(false);
-		
+
 		btnZero.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String jaDigitado = String.valueOf(passwordField.getPassword());
@@ -144,7 +144,7 @@ public class TelaEntrarComCodigo{
 				passwordField.setText(digitando);
 			}
 		});
-		
+
 		btnUm.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String jaDigitado = String.valueOf(passwordField.getPassword());
@@ -152,7 +152,7 @@ public class TelaEntrarComCodigo{
 				passwordField.setText(digitando);
 			}
 		});
-		
+
 		btnDois.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String jaDigitado = String.valueOf(passwordField.getPassword());
@@ -160,7 +160,7 @@ public class TelaEntrarComCodigo{
 				passwordField.setText(digitando);
 			}
 		});
-		
+
 		btnTres.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String jaDigitado = String.valueOf(passwordField.getPassword());
@@ -168,7 +168,7 @@ public class TelaEntrarComCodigo{
 				passwordField.setText(digitando);
 			}
 		});
-		
+
 		btnQuatro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String jaDigitado = String.valueOf(passwordField.getPassword());
@@ -176,7 +176,7 @@ public class TelaEntrarComCodigo{
 				passwordField.setText(digitando);
 			}
 		});
-		
+
 		btnCinco.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String jaDigitado = String.valueOf(passwordField.getPassword());
@@ -184,7 +184,7 @@ public class TelaEntrarComCodigo{
 				passwordField.setText(digitando);
 			}
 		});
-		
+
 		btnSeis.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String jaDigitado = String.valueOf(passwordField.getPassword());
@@ -192,7 +192,7 @@ public class TelaEntrarComCodigo{
 				passwordField.setText(digitando);
 			}
 		});
-		
+
 		btnSete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String jaDigitado = String.valueOf(passwordField.getPassword());
@@ -200,7 +200,7 @@ public class TelaEntrarComCodigo{
 				passwordField.setText(digitando);
 			}
 		});
-		
+
 		btnOito.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String jaDigitado = String.valueOf(passwordField.getPassword());
@@ -208,7 +208,7 @@ public class TelaEntrarComCodigo{
 				passwordField.setText(digitando);
 			}
 		});
-		
+
 		btnNove.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String jaDigitado = String.valueOf(passwordField.getPassword());
@@ -252,25 +252,17 @@ public class TelaEntrarComCodigo{
 					int codAcesso = linhasTxt.get(3);
 
 					if(codAcesso == Integer.parseInt(String.valueOf(passwordField.getPassword()))){
-						
+
 						TelaSelecionarOpcoes op = new TelaSelecionarOpcoes();
-					
+
 						op.internacionalizar(getIdioma()); 
 						op.setAgencia(getAgencia());
-						
+
 						ContaDAO contaDAO = new ContaDAO();
-						try {
-							op.setNomeCliente(contaDAO.innerJoin(getNumConta()));
-							setNome(contaDAO.innerJoin(getNumConta()));
-							op.setTitle(getNome());
-						} catch (ClassNotFoundException e1) {
-				
-							e1.printStackTrace();
-						} catch (SQLException e1) {
-				
-							e1.printStackTrace();
-						}
-						
+
+						op.setNomeCliente(contaDAO.innerJoin(getNumConta()));
+						setNome(contaDAO.innerJoin(getNumConta()));
+						op.setTitle(getNome());
 						op.setNumConta(getNumConta());
 						op.setSize(500, 300);
 						op.setVisible(true);
@@ -298,7 +290,7 @@ public class TelaEntrarComCodigo{
 				}  
 			}  
 		});  
-		
+
 		frame.setSize(350,250);
 		frame.setVisible(true);
 		panelBotoes.add(btnOk);
@@ -307,13 +299,13 @@ public class TelaEntrarComCodigo{
 
 		frame.add(layout, BorderLayout.NORTH);
 		frame.add(panelBotoes, BorderLayout.SOUTH);
-	
+
 	}
-	
+
 	public String getNome() {
 		return nome;
 	}
-	
+
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
@@ -321,11 +313,11 @@ public class TelaEntrarComCodigo{
 	public int getAgencia() {
 		return agencia;
 	}
-	
+
 	public void setAgencia(int agencia) {
 		this.agencia = agencia;
 	}
-	
+
 	public int getNumConta() {
 		return numConta;
 	}
