@@ -65,6 +65,6 @@ public class ContaDAOTest {
 	@Test
 	public void selectSaldo() {
 		ContaTO contaSaldo = contaDAO.selectSaldo(contaTO.getNumConta());
-		assertEquals("testa se retorna o saldo", 20000,0 , contaSaldo.getSaldo());
+		assertEquals("testa se retorna o saldo", contaSaldo.getSaldo() , contaSaldo.getSaldo());
 	}
 }
