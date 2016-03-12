@@ -122,8 +122,6 @@ public class Acesso  extends Observable{
 				}catch(NullPointerException e){//se nenhum idioma for selecionado ele começa com padrão pelo português
 					entCod.internacionalizar(ResourceBundle.getBundle("projeto", new Locale("pt", "BR")));
 				}
-			
-				
 			}	
 		}else{
 			JOptionPane.showMessageDialog(null, "Favor verifique as informações digitadas e tente novamente.");

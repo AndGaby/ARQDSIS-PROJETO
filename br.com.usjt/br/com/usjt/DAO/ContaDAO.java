@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import br.com.usjt.Factory.ConnectionFactory;
 import br.com.usjt.TO.ContaTO;
 import br.com.usjt.TO.SaqueTO;
 
@@ -22,7 +24,7 @@ public class ContaDAO {
 
 		String nome = "";
 
-		try (Connection conn = new AcessoBD().connection();	
+		try (Connection conn = new ConnectionFactory().connection();	
 				PreparedStatement stm = conn.prepareStatement("SELECT nomeCliente from Cliente inner join Conta on Conta.codigoCliente = Cliente.codigoCliente where conta = ?")) {
 			stm.setInt(1, numConta);
 
@@ -43,7 +45,7 @@ public class ContaDAO {
 	public int  selectCodigoCliente(int numConta){
 		int codigoCliente = 0;
 	
-		try (Connection conn = new AcessoBD().connection();	
+		try (Connection conn = new ConnectionFactory().connection();	
 				PreparedStatement stm = conn.prepareStatement("SELECT codigoCliente FROM Conta WHERE conta.conta = ?")) {
 				stm.setInt(1, numConta);
 				
@@ -64,7 +66,7 @@ public class ContaDAO {
 	public ContaTO selectSaldo(int numConta){
 		ContaTO contaTO = new ContaTO();
 
-		try (Connection conn = new AcessoBD().connection();	
+		try (Connection conn = new ConnectionFactory().connection();	
 				PreparedStatement stm = conn.prepareStatement("SELECT saldo FROM Conta WHERE conta.conta = ?")) {
 			stm.setInt(1, numConta);
 
@@ -82,9 +84,9 @@ public class ContaDAO {
 		return contaTO;
 	}
 
-	public SaqueTO update(int numConta, SaqueTO saqueTO){
+	public SaqueTO updateSaque(int numConta, SaqueTO saqueTO){
 
-		try (Connection conn = new AcessoBD().connection();	
+		try (Connection conn = new ConnectionFactory().connection();	
 				PreparedStatement stm = conn.prepareStatement("update Conta set saldo = ? where conta = ?")) {
 			stm.setDouble(1, saqueTO.getSaque());
 			stm.setInt(2, numConta);
@@ -93,5 +95,18 @@ public class ContaDAO {
 			e.printStackTrace();
 		}
 		return saqueTO;
+	}
+	
+	public ContaTO updateTransferencia(ContaTO contaTO){
+
+		try (Connection conn = new ConnectionFactory().connection();	
+				PreparedStatement stm = conn.prepareStatement("update Conta set saldo = ? where conta = ?")) {
+			stm.setDouble(1, contaTO.getSaldo());
+			stm.setInt(2, contaTO.getNumConta());
+			stm.execute();	
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return contaTO;
 	}
 }

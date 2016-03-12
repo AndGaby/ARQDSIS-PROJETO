@@ -2,11 +2,13 @@ package br.com.usjt.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
+
 import javax.swing.table.DefaultTableModel;
+
 import br.com.usjt.DAO.DispenserDAO;
+import br.com.usjt.TO.DispenserTO;
 import br.com.usjt.model.Dispenser;
 import br.com.usjt.view.TelaAdmDispenser;
 import br.com.usjt.view.TelaEscolherOpAdm;
@@ -33,7 +35,7 @@ public class DispenserCTRL extends TelaAdmDispenser{
 		public void actionPerformed(ActionEvent a) {
 			Dispenser dispenser = new Dispenser();
 
-			ArrayList<Dispenser> recuper = dispenser.consultarExtratoDeNotas();
+			ArrayList<DispenserTO> recuper = dispenser.consultarExtratoDeNotas();
 
 			DefaultTableModel dtm = (DefaultTableModel) tblResultado.getModel();
 
@@ -54,27 +56,24 @@ public class DispenserCTRL extends TelaAdmDispenser{
 			}catch(Exception e){
 
 			}
-			for(Iterator<Dispenser> it = recuper.iterator(); it.hasNext();){
-				Dispenser listaLog = it.next();
-			dtm.addRow(new Object[] {listaLog.getNota(), listaLog.getQuantidade()});
+			for(Iterator<DispenserTO> it = recuper.iterator(); it.hasNext();){
+				DispenserTO listaLog = it.next();
+				dtm.addRow(new Object[] {listaLog.getNota(), listaLog.getQuantidade()});
 			}
 		}
 	}
 
 	class BtnResetarListener implements ActionListener{
 		public void actionPerformed(ActionEvent a) {
-			try {
-				DispenserDAO dispenserDAO = new DispenserDAO();
-				
-				dispenserDAO.resetarDispencher();
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
+
+			DispenserDAO dispenserDAO = new DispenserDAO();
+
+			dispenserDAO.resetarDispencher();
+
 
 			Dispenser dispenser = new Dispenser();
 
-			ArrayList<Dispenser> recuper = dispenser.consultarExtratoDeNotas();
+			ArrayList<DispenserTO> recuper = dispenser.consultarExtratoDeNotas();
 
 			DefaultTableModel dtm = (DefaultTableModel) tblResultado.getModel();
 
@@ -95,11 +94,10 @@ public class DispenserCTRL extends TelaAdmDispenser{
 			}catch(Exception e){
 
 			}
-			for(Iterator<Dispenser> it = recuper.iterator(); it.hasNext();){
-				Dispenser listaLog = it.next();
-			dtm.addRow(new Object[] {listaLog.getNota(), listaLog.getQuantidade()});
+			for(Iterator<DispenserTO> it = recuper.iterator(); it.hasNext();){
+				DispenserTO listaLog = it.next();
+				dtm.addRow(new Object[] {listaLog.getNota(), listaLog.getQuantidade()});
 			}
-
 		}
 	}
 }

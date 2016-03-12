@@ -8,8 +8,11 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Observable;
+
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+
+import br.com.usjt.TO.DebitoAutomaticoTO;
 import br.com.usjt.model.DebitoAutomatico;
 import br.com.usjt.view.TelaDebitoAutomatico;
 import br.com.usjt.view.TelaSelecionarOpcoes;
@@ -62,15 +65,7 @@ public class DebitoAutomaticoCTRL extends TelaDebitoAutomatico{
 				getDebitoAutomatico().setNumAgencia(getNumAgencia());
 
 			}
-			try {
-				getDebitoAutomatico().gerarDebito();
-			} catch (ClassNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			getDebitoAutomatico().gerarDebito();
 		}
 	}
 
@@ -94,7 +89,7 @@ public class DebitoAutomaticoCTRL extends TelaDebitoAutomatico{
 			deb.setNumConta(getNumConta());
 
 			try {
-				ArrayList<DebitoAutomatico> recuper = deb.consultar();
+				ArrayList<DebitoAutomaticoTO> recuper = deb.consultar();
 
 				DefaultTableModel dtm = (DefaultTableModel) table.getModel();
 
@@ -108,14 +103,14 @@ public class DebitoAutomaticoCTRL extends TelaDebitoAutomatico{
 					}  
 
 				}catch(Exception e){
-					
+
 				}
 
 				SimpleDateFormat f = new SimpleDateFormat("dd/MM/yyyy");
-								
-				for(Iterator<DebitoAutomatico> it = recuper.iterator(); it.hasNext();){
-					DebitoAutomatico listaLog = it.next();
-				
+
+				for(Iterator<DebitoAutomaticoTO> it = recuper.iterator(); it.hasNext();){
+					DebitoAutomaticoTO listaLog = it.next();
+
 					dtm.addRow(new Object[] {listaLog.getCodDebito(), listaLog.getTipoDebito() , listaLog.getOperadora(),
 							listaLog.getCodigoConsumidor(), f.format(listaLog.getDataDebito()), listaLog.getValorDebito(), listaLog.getNumConta()});
 

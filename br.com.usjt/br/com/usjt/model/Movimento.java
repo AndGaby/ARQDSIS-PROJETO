@@ -7,9 +7,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Observable;
 
-import br.com.usjt.DAO.AcessoBD;
 import br.com.usjt.DAO.ContaDAO;
 import br.com.usjt.DAO.MovimentoDAO;
+import br.com.usjt.Factory.ConnectionFactory;
 import br.com.usjt.TO.ContaTO;
 import br.com.usjt.TO.MovimentoTO;
 
@@ -50,18 +50,18 @@ public class Movimento extends Observable{
 		notifyObservers();
 	}
 
-	public void geraMovimento(ContaTO contaTO, MovimentoTO movimentoTO, String tipo){
+	public void geraMovimento(ContaTO contaTO, MovimentoTO movimentoTO, ContaTO contaTODestino, String tipo){
 		MovimentoDAO movDAO = new MovimentoDAO();
 		ContaDAO contaDAO = new ContaDAO();
 
-		movDAO.insert(contaTO, movimentoTO /**agenciaDestino, contaDestino, **/, tipo);
+		movDAO.insert(contaTO, movimentoTO, contaTODestino, tipo);
 
 		int codigoMovimento = movDAO.selecCodigo(contaTO.getNumConta());
 		int codigoCliente = contaDAO.selectCodigoCliente(contaTO.getNumConta());
 
 		log = new Log();
-//		log.setAgencia(agencia);
-//		log.setConta(conta);
+		log.setAgencia(contaTO.getAgencia());
+		log.setConta(contaTO.getNumConta());
 		log.setCodigoMovimento(codigoMovimento);
 		log.setCodigoCliente(codigoCliente);
 		log.setDataOperacao(getDataDoMovimento());
@@ -74,7 +74,7 @@ public class Movimento extends Observable{
 	public  ArrayList<Log>  consultarExtratoDias(Date dataInicial, Date dataFinal) throws SQLException{
 		//cria um arrayList para serem armazenado todas as informações do banco de dados
 		ArrayList<Log> resultadoPesquisa = new ArrayList<Log>();
-		Connection conn = new AcessoBD().connection();
+		Connection conn = new ConnectionFactory().connection();
 
 		MovimentoDAO movimentoDAO = new MovimentoDAO();
 
@@ -111,7 +111,7 @@ public class Movimento extends Observable{
 	public  ArrayList<Log>  consultarExtratoUltimosDias(int conta) throws SQLException{
 		//cria um arrayList para serem armazenado todas as informações do banco de dados
 		ArrayList<Log> resultadoPesquisa = new ArrayList<Log>();
-		Connection conn = new AcessoBD().connection();
+		Connection conn = new ConnectionFactory().connection();
 
 		MovimentoDAO movimentoDAO = new MovimentoDAO();
 

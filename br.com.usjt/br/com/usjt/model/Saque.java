@@ -61,7 +61,7 @@ public class Saque extends Movimento {
 
 			saqueTO.setSaque(novosaldo);
 
-			contaDAO.update(getConta(), saqueTO);
+			contaDAO.updateSaque(getConta(), saqueTO);
 
 			Date dataHoje = new Date(); 
 
@@ -71,8 +71,13 @@ public class Saque extends Movimento {
 
 			contaTO.setAgencia(getAgencia());
 			contaTO.setNumConta(getConta());
+			
+			ContaTO contaTODestino = new ContaTO();
+			
+			contaTODestino.setAgencia(getAgencia());
+			contaTODestino.setNumConta(getConta());
 
-			geraMovimento(contaTO, movimentoTO, "Debito em Conta corrente");
+			geraMovimento(contaTO, movimentoTO, contaTODestino, "Debito em Conta corrente");
 		}
 		else{
 			JOptionPane.showMessageDialog(null, "Saldo insuficiente para saque");
