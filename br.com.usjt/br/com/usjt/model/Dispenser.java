@@ -39,7 +39,9 @@ public class Dispenser extends Observable{
 		notifyObservers();
 	}
 
-	public void contarNotas(double valorRetirar){
+	public boolean contarNotas(double valorRetirar){
+		boolean testeUnitario; //variavel criada para testes do junit
+		
 		try{	
 			DispenserDAO dispenserDAO = new DispenserDAO();
 
@@ -89,8 +91,12 @@ public class Dispenser extends Observable{
 			dispenserDAO.retirarNota(dispenserDAO.recuperarNotas());
 
 			JOptionPane.showMessageDialog(null, "Nao emitimos comprovante para essa operacao");
+			
+			testeUnitario = true;
 		}catch(Exception e){
+			testeUnitario = false;
 		}
+		return testeUnitario;
 	}
 
 	public ArrayList<DispenserTO> consultarExtratoDeNotas(){
