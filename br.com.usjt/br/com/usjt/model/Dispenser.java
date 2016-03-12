@@ -40,7 +40,7 @@ public class Dispenser extends Observable{
 	}
 
 	public boolean contarNotas(double valorRetirar){
-		boolean testeUnitario; //variavel criada para testes do junit
+		boolean testeUnitario = true; //variavel criada para testes do junit
 		
 		try{	
 			DispenserDAO dispenserDAO = new DispenserDAO();
