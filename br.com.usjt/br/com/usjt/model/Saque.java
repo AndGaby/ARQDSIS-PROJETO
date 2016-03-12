@@ -60,8 +60,9 @@ public class Saque extends Movimento {
 			double novosaldo = saldoAtual - valorSacar;
 
 			saqueTO.setSaque(novosaldo);
+			contaTO.setNumConta(getConta());
 
-			contaDAO.updateSaque(getConta(), saqueTO);
+			contaDAO.updateSaque(contaTO, saqueTO);
 
 			Date dataHoje = new Date(); 
 
