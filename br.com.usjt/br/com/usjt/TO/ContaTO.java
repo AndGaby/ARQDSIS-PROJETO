@@ -36,17 +36,6 @@ public class ContaTO {
 	public void setSaldo(Double saldo) {
 		this.saldo = saldo;
 	}
-	
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + agencia;
-		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
-		result = prime * result + numConta;
-		result = prime * result + ((saldo == null) ? 0 : saldo.hashCode());
-		return result;
-	}
 
 	@Override
 	public boolean equals(Object obj) {

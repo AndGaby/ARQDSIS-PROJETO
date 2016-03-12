@@ -33,18 +33,6 @@ public class MovimentoTO {
 	}
 
 	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + codigoMovimento;
-		result = prime * result + ((dataDoMovimento == null) ? 0 : dataDoMovimento.hashCode());
-		long temp;
-		temp = Double.doubleToLongBits(valorDaOperacao);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
-		return result;
-	}
-
-	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;

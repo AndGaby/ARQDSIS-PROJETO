@@ -30,16 +30,6 @@ public class SaqueTO {
 	}
 
 	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + agencia;
-		result = prime * result + conta;
-		result = prime * result + ((saque == null) ? 0 : saque.hashCode());
-		return result;
-	}
-
-	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
