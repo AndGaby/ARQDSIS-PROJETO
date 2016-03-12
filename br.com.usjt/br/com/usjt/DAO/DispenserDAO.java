@@ -16,7 +16,7 @@ public class DispenserDAO {
 
 	public boolean resetarDispencher() {
 		try (Connection conn = new ConnectionFactory().connection();	
-				PreparedStatement stm = conn.prepareStatement("UPDATE Dispenser SET QuantidadeDeNotas = 1000 WHERE nota = 10 or Nota = 20")) {
+			PreparedStatement stm = conn.prepareStatement("UPDATE Dispenser SET QuantidadeDeNotas = 1000 WHERE nota = 10 or Nota = 20")) {
 			stm.execute();
 			PreparedStatement stm2 = conn.prepareStatement("UPDATE Dispenser SET QuantidadeDeNotas = 500 WHERE Nota = 50");
 			stm2.execute();	
