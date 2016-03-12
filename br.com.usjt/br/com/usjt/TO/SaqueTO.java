@@ -28,4 +28,35 @@ public class SaqueTO {
 	public void setSaque(Double saque) {
 		this.saque = saque;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + agencia;
+		result = prime * result + conta;
+		result = prime * result + ((saque == null) ? 0 : saque.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		SaqueTO other = (SaqueTO) obj;
+		if (agencia != other.agencia)
+			return false;
+		if (conta != other.conta)
+			return false;
+		if (saque == null) {
+			if (other.saque != null)
+				return false;
+		} else if (!saque.equals(other.saque))
+			return false;
+		return true;
+	}
 }
