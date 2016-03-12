@@ -94,7 +94,7 @@ public class Dispenser extends Observable{
 			
 			testeUnitario = true;
 		}catch(Exception e){
-			testeUnitario = false;
+			
 		}
 		return testeUnitario;
 	}
