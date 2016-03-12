@@ -64,10 +64,10 @@ public class Saque extends Movimento {
 
 			contaDAO.updateSaque(contaTO, saqueTO);
 
-			Date dataHoje = new Date(); 
+			Date dataDeHoje = new Date(); 
 
 			MovimentoTO movimentoTO = new MovimentoTO();
-			movimentoTO.setDataDoMovimento(dataHoje);
+			movimentoTO.setDataDoMovimento(dataDeHoje);
 			movimentoTO.setValorDaOperacao(valorSacar);
 
 			contaTO.setAgencia(getAgencia());
