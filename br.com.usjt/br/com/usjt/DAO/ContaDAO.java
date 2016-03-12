@@ -20,7 +20,7 @@ public class ContaDAO {
 		}
 	}
 
-	public String  innerJoin(int numConta) throws ClassNotFoundException, SQLException {
+	public String  innerJoin(int numConta) {
 
 		String nome = "";
 
@@ -84,12 +84,12 @@ public class ContaDAO {
 		return contaTO;
 	}
 
-	public SaqueTO updateSaque(int numConta, SaqueTO saqueTO){
+	public SaqueTO updateSaque(ContaTO contaTO, SaqueTO saqueTO){
 
 		try (Connection conn = new ConnectionFactory().connection();	
 				PreparedStatement stm = conn.prepareStatement("update Conta set saldo = ? where conta = ?")) {
 			stm.setDouble(1, saqueTO.getSaque());
-			stm.setInt(2, numConta);
+			stm.setInt(2, contaTO.getNumConta());
 			stm.execute();	
 		} catch (SQLException e) {
 			e.printStackTrace();
