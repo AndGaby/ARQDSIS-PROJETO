@@ -11,12 +11,15 @@ import java.util.ResourceBundle;
 import javax.swing.JOptionPane;
 
 import br.com.usjt.model.Acesso;
+import br.com.usjt.model.Conta;
 import br.com.usjt.view.TelaAdmDoSistemaLogin;
 import br.com.usjt.view.TelaDeAcesso;
 import br.com.usjt.view.TelaSobre;
 
 public class AcessarContaCTRL extends TelaDeAcesso {
 
+	private Conta conta = new Conta();
+	
 	public AcessarContaCTRL(Acesso acesso) {
 		super(acesso);
 		addBtnOkListener(new btnOkListener());
@@ -35,34 +38,38 @@ public class AcessarContaCTRL extends TelaDeAcesso {
 		public void actionPerformed(ActionEvent a) {
 			try { 
 				getAcesso().setAgencia(getTextAgencia());
+				conta.setAgencia(getTextAgencia());
 			}catch(NumberFormatException erro){ 
 				JOptionPane.showMessageDialog(null, "entre com uma agencia valida"); 
 				return; 
 			}
 
 			try { 
-				getAcesso().setConta(getTextConta()); 
+				getAcesso().setConta(getTextConta());
+				conta.setNumConta(getTextConta());
 			}catch(NumberFormatException erro){ 
 				JOptionPane.showMessageDialog(null, "entre com uma conta valida"); 
 				return; 
 			}
 
 			try { 
-				getAcesso().setSenha(Integer.parseInt(String.valueOf(getTextSenha())));//converte o jPassword para string e depois para inteiro 
+				getAcesso().setSenha(Integer.parseInt(String.valueOf(getTextSenha())));//converte o jPassword para string e depois para inteiro
+				conta.setSenha(Integer.parseInt(String.valueOf(getTextSenha())));
 			}catch(NumberFormatException erro){ 
 				JOptionPane.showMessageDialog(null," entre com uma senha valida"); 
 				return; 
 			}
 
-			try {
-				if(getAcesso().validar() == true){
+			try {	
+				if(getAcesso().validar(conta) == true){
 					dispose();
 					getAcesso().setIdioma(getIdioma());
-				
-
 				}
 			} catch (IOException e) {
 				JOptionPane.showMessageDialog(null, "conta inexistente");
+				e.printStackTrace();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}

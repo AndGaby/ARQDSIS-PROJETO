@@ -1,25 +1,22 @@
 package br.com.usjt.model;
 
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.LineNumberReader;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 import java.util.Observable;
 import java.util.ResourceBundle;
-
 import javax.swing.JOptionPane;
-
+import br.com.usjt.Cryptograrfia.LerConta;
 import br.com.usjt.view.TelaEntrarComCodigo;
 import br.com.usjt.view.TelaGerarCodigo;
+
 
 public class Acesso  extends Observable{
 
 	private int agencia, conta, senha, codigoDeAcesso;
-	private FileReader txtConta;
 	private boolean validar;
 	private ResourceBundle idioma;
 
@@ -71,62 +68,51 @@ public class Acesso  extends Observable{
 		this.idioma = idioma;
 	}
 
+	public boolean validar(Conta conta) throws IOException, Exception{
+		
+		LerConta lerConta = new LerConta();
+		BufferedReader reader = new BufferedReader(new FileReader(conta.getNumConta()+""));
+		List<Conta> listaConta = new ArrayList<Conta>();
+		String linha;
 
-	// enable user to open file
-	public FileReader openFile() throws FileNotFoundException {
-		txtConta = new FileReader (""+ getConta());
-		return txtConta;
-	} // end method openFile
-	// read record from file
-
-	public boolean validar() throws IOException{
-
-		BufferedReader entrada = new BufferedReader(openFile());
-
-		ArrayList<Integer> linhasTxt = new ArrayList<Integer>();
-		String texto;
-		while((texto = entrada.readLine()) != null){
-
-			linhasTxt.add(Integer.parseInt(texto, 16));//converte de hexadecimal para inteiro
-
+		while ((linha = reader.readLine()) != null) {
+			listaConta.add(lerConta.descriptografar(linha));
 		}
-
-		int agencia = linhasTxt.get(1);
-		int senha = linhasTxt.get(2);
-		if(agencia == getAgencia() && senha == getSenha()){
-			validar = true;
-			JOptionPane.showMessageDialog(null, "Acesso Autorizado!");
-
-			File arquivoLeitura = new File("" + getConta()); 
-			LineNumberReader linhaLeitura = new LineNumberReader(openFile());  
-			linhaLeitura.skip(arquivoLeitura.length());  
-			int qtdLinha = linhaLeitura.getLineNumber(); 
-
-			if(qtdLinha != 3){
-				TelaGerarCodigo telaG = new TelaGerarCodigo();
-				telaG.setNumConta(getConta());
-				try{//verifica se nenhum idioma foi selecionado
-					telaG.internacionalizar(getIdioma());
-				}catch(NullPointerException e){//se nenhum idioma for selecionado ele começa com padrão pelo português
-					telaG.internacionalizar(ResourceBundle.getBundle("projeto", new Locale("pt", "BR")));
+		for (Conta conta2 : listaConta) {
+			if(conta2.getAgencia() == getAgencia() && conta2.getSenha() == getSenha()){		
+				validar = true;
+				if(conta2.getCodAcesso() == 0){
+					validar = false;
+					String codigoGerado =""; 
+					for(int x = 0; x<3; x++){
+						int i = (int)(0+ (Math.random()*9));
+						codigoGerado += i;
+					}
+						conta.setCodAcesso(Integer.parseInt(codigoGerado));
+						TelaGerarCodigo telaG = new TelaGerarCodigo(conta);
+						telaG.setNumConta(conta2.getNumConta());
+						lerConta.incluirConta(conta);
+						try{//verifica se nenhum idioma foi selecionado
+							telaG.internacionalizar(getIdioma());
+						}catch(NullPointerException e){//se nenhum idioma for selecionado ele começa com padrão pelo português
+							telaG.internacionalizar(ResourceBundle.getBundle("projeto", new Locale("pt", "BR")));
+						}
+						telaG.setAgencia(conta2.getAgencia());
+						telaG.setSize(800, 400);
+						telaG.setVisible(true);
+				}else{
+					TelaEntrarComCodigo entCod = new TelaEntrarComCodigo(conta2);
+					try{//verifica se nenhum idioma foi selecionado
+						entCod.internacionalizar(getIdioma());
+					}catch(NullPointerException e){//se nenhum idioma for selecionado ele começa com padrão pelo português
+						entCod.internacionalizar(ResourceBundle.getBundle("projeto", new Locale("pt", "BR")));
+					}
 				}
-				telaG.setAgencia(getAgencia());
-				telaG.setSize(800, 400);
-				telaG.setVisible(true);
 			}else{
-				TelaEntrarComCodigo entCod = new TelaEntrarComCodigo();
-				entCod.setNumConta(getConta());
-				entCod.setAgencia(getAgencia());
-				try{//verifica se nenhum idioma foi selecionado
-					entCod.internacionalizar(getIdioma());
-				}catch(NullPointerException e){//se nenhum idioma for selecionado ele começa com padrão pelo português
-					entCod.internacionalizar(ResourceBundle.getBundle("projeto", new Locale("pt", "BR")));
-				}
-			}	
-		}else{
-			JOptionPane.showMessageDialog(null, "Favor verifique as informações digitadas e tente novamente.");
-			validar = false;
+				JOptionPane.showMessageDialog(null, "Verifique as informações digitadas!");
+			}
 		}
+		reader.close();
 		return validar;
 	}
 }

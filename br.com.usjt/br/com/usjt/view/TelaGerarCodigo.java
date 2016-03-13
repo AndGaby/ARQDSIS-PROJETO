@@ -6,10 +6,6 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ResourceBundle;
 
 import javax.swing.JButton;
@@ -21,6 +17,7 @@ import javax.swing.JTextField;
 
 import br.com.usjt.controller.AcessarContaCTRL;
 import br.com.usjt.model.Acesso;
+import br.com.usjt.model.Conta;
 
 public class TelaGerarCodigo extends JFrame {
 
@@ -32,7 +29,7 @@ public class TelaGerarCodigo extends JFrame {
 	private int numConta, agencia;
 	private ResourceBundle idioma;
 
-	public TelaGerarCodigo() {
+	public TelaGerarCodigo(Conta conta) {
 		setBounds(100, 100, 517, 314);
 
 		setResizable(false);
@@ -90,9 +87,7 @@ public class TelaGerarCodigo extends JFrame {
 				if(txtCodigoGerado.getText().trim().equals("")  ){
 					JOptionPane.showMessageDialog(null, "Por favor, clique no botão gerar!");
 				}else{
-					TelaEntrarComCodigo cod = new TelaEntrarComCodigo();
-					cod.setNumConta(getNumConta());
-					cod.setAgencia(getAgencia());
+					TelaEntrarComCodigo cod = new TelaEntrarComCodigo(conta);
 					cod.setIdioma(getIdioma());
 					dispose();
 				}
@@ -101,28 +96,7 @@ public class TelaGerarCodigo extends JFrame {
 
 		btnGerar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				String codigoGerado = "";
-				for(int x = 0; x<3; x++){
-					int i = (int)(0+ (Math.random()*9));
-					codigoGerado += i;
-				}
-
-				txtCodigoGerado.setText(codigoGerado);
-				Acesso acesso = new Acesso();
-
-				FileWriter output;
-				try {
-					output = new FileWriter(new File("" + getNumConta()), true);
-					PrintWriter gravarArq = new PrintWriter(output, true);//coloca o arquivo na variavel para preenchelo (o true permite que escreve em um arquivo de texto ja preenchido)
-
-					String codigoGeradoHex = Integer.toHexString(Integer.parseInt(codigoGerado));
-					gravarArq.format("\n" + codigoGeradoHex);
-
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-
+				txtCodigoGerado.setText(""+ conta.getCodAcesso());
 			}
 		});
 

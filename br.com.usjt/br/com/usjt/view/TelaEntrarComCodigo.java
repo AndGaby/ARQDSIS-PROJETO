@@ -2,7 +2,6 @@ package br.com.usjt.view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Container;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -10,12 +9,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import javax.swing.JButton;
@@ -28,6 +21,7 @@ import javax.swing.JPasswordField;
 import br.com.usjt.DAO.ContaDAO;
 import br.com.usjt.controller.AcessarContaCTRL;
 import br.com.usjt.model.Acesso;
+import br.com.usjt.model.Conta;
 
 
 public class TelaEntrarComCodigo{
@@ -37,11 +31,10 @@ public class TelaEntrarComCodigo{
 	private JPasswordField passwordField;
 	private ResourceBundle resourseBundle;
 	private ResourceBundle idioma;
-	private int numConta, agencia;
 	private String nome;
 	private JFrame frame;
 
-	public TelaEntrarComCodigo() {
+	public TelaEntrarComCodigo(Conta conta) {
 
 
 		frame = new JFrame();
@@ -234,51 +227,20 @@ public class TelaEntrarComCodigo{
 
 		btnOk.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
-				FileReader txtConta;
-				try {
-					txtConta = new FileReader (""+ getNumConta());
-					BufferedReader entrada = null;
-					entrada = new BufferedReader(txtConta);
-
-					ArrayList<Integer> linhasTxt = new ArrayList<Integer>();
-
-					String texto;
-
-					while((texto = entrada.readLine()) != null){
-						linhasTxt.add(Integer.parseInt(texto, 16));//converte de hexadecimal para inteiro	
-					}
-
-					int codAcesso = linhasTxt.get(3);
-
-					if(codAcesso == Integer.parseInt(String.valueOf(passwordField.getPassword()))){
-
-						TelaSelecionarOpcoes op = new TelaSelecionarOpcoes();
-
-						op.internacionalizar(getIdioma()); 
-						op.setAgencia(getAgencia());
-
-						ContaDAO contaDAO = new ContaDAO();
-
-						op.setNomeCliente(contaDAO.innerJoin(getNumConta()));
-						setNome(contaDAO.innerJoin(getNumConta()));
-						op.setTitle(getNome());
-						op.setNumConta(getNumConta());
-						op.setSize(500, 300);
-						op.setVisible(true);
-						frame.dispose();
-					}else{
-						JOptionPane.showMessageDialog(null, "Codigo de Acesso Incorreto");
-					}			
-				} catch (FileNotFoundException e2) {
-					// TODO Auto-generated catch block
-					e2.printStackTrace();
-				} catch (NumberFormatException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+				if(conta.getCodAcesso() == Integer.parseInt(String.valueOf(passwordField.getPassword()))){
+					TelaSelecionarOpcoes op = new TelaSelecionarOpcoes();
+					op.internacionalizar(getIdioma()); 
+					op.setAgencia(conta.getAgencia());
+					ContaDAO contaDAO = new ContaDAO();
+					op.setNomeCliente(contaDAO.innerJoin(conta.getNumConta()));
+					setNome(contaDAO.innerJoin(conta.getNumConta()));
+					op.setTitle(getNome());
+					op.setNumConta(conta.getNumConta());
+					op.setSize(500, 300);
+					op.setVisible(true);
+					frame.dispose();
+				}else{
+					JOptionPane.showMessageDialog(null, "Verifique o código digitado");
 				}
 			}
 		});
@@ -308,22 +270,6 @@ public class TelaEntrarComCodigo{
 
 	public void setNome(String nome) {
 		this.nome = nome;
-	}
-
-	public int getAgencia() {
-		return agencia;
-	}
-
-	public void setAgencia(int agencia) {
-		this.agencia = agencia;
-	}
-
-	public int getNumConta() {
-		return numConta;
-	}
-
-	public void setNumConta(int numConta) {
-		this.numConta = numConta;
 	}
 
 	public ResourceBundle getIdioma() {

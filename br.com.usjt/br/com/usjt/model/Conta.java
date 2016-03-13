@@ -12,7 +12,7 @@ import br.com.usjt.DAO.ContaDAO;
 import br.com.usjt.TO.ContaTO;
 
 public class Conta extends Observable{
-	private int agencia, saldo, numConta;
+	private int agencia, saldo, numConta, codAcesso, senha;
 	private String nome;
 
 	public Conta() {
@@ -53,6 +53,27 @@ public class Conta extends Observable{
 
 	public void setSaldo(int saldo) {
 		this.saldo = saldo;
+		setChanged();
+		notifyObservers();
+	}
+
+	public int getCodAcesso() {
+		return codAcesso;
+	}
+
+	public void setCodAcesso(int codAcesso) {
+		this.codAcesso = codAcesso;
+		setChanged();
+		notifyObservers();
+	}
+
+	
+	public int getSenha() {
+		return senha;
+	}
+
+	public void setSenha(int senha) {
+		this.senha = senha;
 		setChanged();
 		notifyObservers();
 	}
@@ -101,5 +122,14 @@ public class Conta extends Observable{
 		gravarArq.format("\n" + saldoDoDia);
 		
 		return teste;
+	}
+	
+	public int compareTo(Conta obj) {
+		if (this.agencia > obj.getAgencia())
+			return 1;
+		else if (this.agencia < obj.getAgencia())
+			return -1;
+		else
+			return -1;
 	}
 }
