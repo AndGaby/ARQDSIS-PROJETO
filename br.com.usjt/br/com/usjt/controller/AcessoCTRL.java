@@ -62,18 +62,18 @@ public class AcessoCTRL extends HttpServlet {
 					conta.setAgencia(Integer.parseInt(agencia));
 
 					if (acesso.validar(conta) == true) {
-						dispatcher = request.getRequestDispatcher("./home.jsp");
+						dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/conteudo/home.jsp");
 						Conta.conta = conta;
 						request.setAttribute("conta", Conta.conta);
 					} else {
 						error = true;
 						request.setAttribute("error", error);
-						dispatcher = request.getRequestDispatcher("./Acesso.jsp");
+						dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/conteudo/Acesso.jsp");
 					}
 				} else {
 					error = true;
 					request.setAttribute("error", error);
-					dispatcher = request.getRequestDispatcher("./Acesso.jsp");
+					dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/conteudo/Acesso.jsp");
 				}
 				dispatcher.forward(request, response);
 
