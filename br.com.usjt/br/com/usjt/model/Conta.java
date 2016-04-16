@@ -12,6 +12,7 @@ import br.com.usjt.DAO.ContaDAO;
 import br.com.usjt.TO.ContaTO;
 
 public class Conta extends Observable{
+	public static Conta conta;
 	private int agencia, saldo, numConta, codAcesso, senha;
 	private String nome;
 

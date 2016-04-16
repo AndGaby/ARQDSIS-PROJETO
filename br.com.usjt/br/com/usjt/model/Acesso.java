@@ -1,20 +1,19 @@
 package br.com.usjt.model;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
-import java.util.Observable;
 import java.util.ResourceBundle;
+
 import javax.swing.JOptionPane;
+
 import br.com.usjt.Cryptograrfia.LerConta;
-import br.com.usjt.view.TelaEntrarComCodigo;
-import br.com.usjt.view.TelaGerarCodigo;
 
 
-public class Acesso  extends Observable{
+public class Acesso{
 
 	private int agencia, conta, senha, codigoDeAcesso;
 	private boolean validar;
@@ -26,8 +25,6 @@ public class Acesso  extends Observable{
 
 	public void setAgencia(int agencia) {
 		this.agencia = agencia;
-		setChanged();
-		notifyObservers();
 	}
 
 	public int getConta() {
@@ -36,8 +33,6 @@ public class Acesso  extends Observable{
 
 	public void setConta(int conta) {
 		this.conta = conta;
-		setChanged();
-		notifyObservers();
 	}
 
 	public int getSenha() {
@@ -46,8 +41,6 @@ public class Acesso  extends Observable{
 
 	public void setSenha(int senha) {
 		this.senha = senha;
-		setChanged();
-		notifyObservers();
 	}
 
 	public int getCodigoDeAcesso() {
@@ -56,8 +49,6 @@ public class Acesso  extends Observable{
 
 	public void setCodigoDeAcesso(int codigoDeAcesso) {
 		this.codigoDeAcesso = codigoDeAcesso;
-		setChanged();
-		notifyObservers();
 	}
 
 	public ResourceBundle getIdioma() {
@@ -68,19 +59,34 @@ public class Acesso  extends Observable{
 		this.idioma = idioma;
 	}
 
-	public boolean validar(Conta conta) throws IOException, Exception{
-		
+	public boolean validar(Conta conta){
 		LerConta lerConta = new LerConta();
-		BufferedReader reader = new BufferedReader(new FileReader(conta.getNumConta()+""));
+		
+		BufferedReader reader = null;
+		try {
+			reader = new BufferedReader(new FileReader("C:\\Users\\Anderson\\OneDrive\\Faculdade\\3ª Ano\\Workspace\\Projeto_ARQDSIS\\"+ getConta()));
+		} catch (FileNotFoundException e1) {
+			validar = false;
+		}
 		List<Conta> listaConta = new ArrayList<Conta>();
 		String linha;
 
-		while ((linha = reader.readLine()) != null) {
-			listaConta.add(lerConta.descriptografar(linha));
+		try {
+			while ((linha = reader.readLine()) != null) {
+				listaConta.add(lerConta.descriptografar(linha));
+			}
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
 		}
+		
 		for (Conta conta2 : listaConta) {
 			if(conta2.getAgencia() == getAgencia() && conta2.getSenha() == getSenha()){		
 				validar = true;
+			
 				if(conta2.getCodAcesso() == 0){
 					validar = false;
 					String codigoGerado =""; 
@@ -89,30 +95,19 @@ public class Acesso  extends Observable{
 						codigoGerado += i;
 					}
 						conta.setCodAcesso(Integer.parseInt(codigoGerado));
-						TelaGerarCodigo telaG = new TelaGerarCodigo(conta);
-						telaG.setNumConta(conta2.getNumConta());
-						lerConta.incluirConta(conta);
-						try{//verifica se nenhum idioma foi selecionado
-							telaG.internacionalizar(getIdioma());
-						}catch(NullPointerException e){//se nenhum idioma for selecionado ele começa com padrão pelo português
-							telaG.internacionalizar(ResourceBundle.getBundle("projeto", new Locale("pt", "BR")));
-						}
-						telaG.setAgencia(conta2.getAgencia());
-						telaG.setSize(800, 400);
-						telaG.setVisible(true);
+				
 				}else{
-					TelaEntrarComCodigo entCod = new TelaEntrarComCodigo(conta2);
+//					TelaEntrarComCodigo entCod = new TelaEntrarComCodigo(conta2);
 					try{//verifica se nenhum idioma foi selecionado
-						entCod.internacionalizar(getIdioma());
+//						entCod.internacionalizar(getIdioma());
 					}catch(NullPointerException e){//se nenhum idioma for selecionado ele começa com padrão pelo português
-						entCod.internacionalizar(ResourceBundle.getBundle("projeto", new Locale("pt", "BR")));
+//						entCod.internacionalizar(ResourceBundle.getBundle("projeto", new Locale("pt", "BR")));
 					}
 				}
 			}else{
 				JOptionPane.showMessageDialog(null, "Verifique as informações digitadas!");
 			}
 		}
-		reader.close();
 		return validar;
 	}
 }

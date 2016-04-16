@@ -10,32 +10,16 @@ import br.com.usjt.TO.SaqueTO;
 public class Saque extends Movimento {
 
 	private Dispenser dispenser;
-	private int conta, agencia;
 	private Double saque;
+
+	public Saque() {
+		// TODO Auto-generated constructor stub
+	}
 
 	public Saque(Movimento movimento) {
 		dispenser = new Dispenser();
 	} 
 
-	public int getConta() {
-		return conta;
-	}
-
-	public int getAgencia() {
-		return agencia;
-	}
-
-	public void setConta(int conta) {
-		this.conta = conta;
-		setChanged();
-		notifyObservers();
-	}
-
-	public void setAgencia(int agencia) {
-		this.agencia = agencia;
-		setChanged();
-		notifyObservers();
-	}
 
 	public Double getSaque() {
 		return saque;
@@ -47,21 +31,21 @@ public class Saque extends Movimento {
 		notifyObservers();
 	}
 
-	public boolean fazerSaque(double valorSacar){
+	public boolean fazerSaque(double valorSacar, Conta conta){
 		ContaDAO contaDAO = new ContaDAO();
 		SaqueTO saqueTO = new SaqueTO();
-		ContaTO contaTO = contaDAO.selectSaldo(getConta());
+		ContaTO contaTO = contaDAO.selectSaldo(conta.getNumConta());
 
 		double saldoAtual = contaTO.getSaldo();
 		boolean teste; //variavel para teste no junit
-		
+
 		if(saldoAtual >= valorSacar){
 			dispenser.contarNotas(valorSacar);
 
 			double novosaldo = saldoAtual - valorSacar;
 
 			saqueTO.setSaque(novosaldo);
-			contaTO.setNumConta(getConta());
+			contaTO.setNumConta(conta.getNumConta());
 
 			contaDAO.updateSaque(contaTO, saqueTO);
 
@@ -71,13 +55,13 @@ public class Saque extends Movimento {
 			movimentoTO.setDataDoMovimento(dataDeHoje);
 			movimentoTO.setValorDaOperacao(valorSacar);
 
-			contaTO.setAgencia(getAgencia());
-			contaTO.setNumConta(getConta());
-			
+			contaTO.setAgencia(conta.getAgencia());
+			contaTO.setNumConta(conta.getNumConta());
+
 			ContaTO contaTODestino = new ContaTO();
-			
-			contaTODestino.setAgencia(getAgencia());
-			contaTODestino.setNumConta(getConta());
+
+			contaTODestino.setAgencia(conta.getAgencia());
+			contaTODestino.setNumConta(conta.getNumConta());
 
 			geraMovimento(contaTO, movimentoTO, contaTODestino, "Debito em Conta corrente");
 			teste = true;

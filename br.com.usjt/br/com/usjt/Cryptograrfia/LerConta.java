@@ -13,8 +13,8 @@ public class LerConta {
 
 	public boolean incluirConta(Conta conta) throws Exception {
 		String linhaInlcuir = cryptoConta(conta);
-		new File(conta.getNumConta()+"").delete();
-		BufferedWriter writer = new BufferedWriter(new FileWriter(""+conta.getNumConta()));
+		new File("C:\\Users\\Anderson\\OneDrive\\Faculdade\\3ª Ano\\Workspace\\Projeto_ARQDSIS\\chave.dummy" +conta.getNumConta()+"").delete();
+		BufferedWriter writer = new BufferedWriter(new FileWriter("C:\\Users\\Anderson\\OneDrive\\Faculdade\\3ª Ano\\Workspace\\Projeto_ARQDSIS\\"+conta.getNumConta()));
 		writer.write(linhaInlcuir);
 		writer.close();
 		return true;
@@ -27,19 +27,19 @@ public class LerConta {
 		byte[] byt;
 
 		byt = (conta.getAgencia() + "").getBytes();
-		crypto.geraCifra(byt, new File("chave.dummy"));
+		crypto.geraCifra(byt, new File("C:\\Users\\Anderson\\OneDrive\\Faculdade\\3ª Ano\\Workspace\\Projeto_ARQDSIS\\chave.dummy"));
 		addNoTexto += new String(crypto.getTextoCifrado()) + " ";
 
 		byt = (conta.getNumConta() + "").getBytes();
-		crypto.geraCifra(byt, new File("chave.dummy"));
+		crypto.geraCifra(byt, new File("C:\\Users\\Anderson\\OneDrive\\Faculdade\\3ª Ano\\Workspace\\Projeto_ARQDSIS\\chave.dummy"));
 		addNoTexto += new String(crypto.getTextoCifrado()) + " ";
 
 		byt = (conta.getSenha() + "").getBytes();
-		crypto.geraCifra(byt, new File("chave.dummy"));
+		crypto.geraCifra(byt, new File("C:\\Users\\Anderson\\OneDrive\\Faculdade\\3ª Ano\\Workspace\\Projeto_ARQDSIS\\chave.dummy"));
 		addNoTexto += new String(crypto.getTextoCifrado()) + " ";
 
 		byt = (conta.getCodAcesso() + "").getBytes();
-		crypto.geraCifra(byt, new File("chave.dummy"));
+		crypto.geraCifra(byt, new File("C:\\Users\\Anderson\\OneDrive\\Faculdade\\3ª Ano\\Workspace\\Projeto_ARQDSIS\\chave.dummy"));
 		addNoTexto += new String(crypto.getTextoCifrado()) + " ";
 
 		return addNoTexto;
@@ -51,17 +51,17 @@ public class LerConta {
 		Crypto crypto = new Crypto();
 		String dado[] = linha.split(" ");
 
-		crypto.geraDecifra(dado[0].getBytes(), new File("chave.dummy"));
+		crypto.geraDecifra(dado[0].getBytes(), new File("C:\\Users\\Anderson\\OneDrive\\Faculdade\\3ª Ano\\Workspace\\Projeto_ARQDSIS\\chave.dummy"));
 		retorno.setAgencia(Integer.parseInt(new String(crypto
 				.getTextoDecifrado())));
 
-		crypto.geraDecifra(dado[1].getBytes(), new File("chave.dummy"));
+		crypto.geraDecifra(dado[1].getBytes(), new File("C:\\Users\\Anderson\\OneDrive\\Faculdade\\3ª Ano\\Workspace\\Projeto_ARQDSIS\\chave.dummy"));
 		retorno.setNumConta(Integer.parseInt(new String(crypto.getTextoDecifrado())));
 
-		crypto.geraDecifra(dado[2].getBytes(), new File("chave.dummy"));
+		crypto.geraDecifra(dado[2].getBytes(), new File("C:\\Users\\Anderson\\OneDrive\\Faculdade\\3ª Ano\\Workspace\\Projeto_ARQDSIS\\chave.dummy"));
 		retorno.setSenha(Integer.parseInt(new String(crypto.getTextoDecifrado())));
 
-		crypto.geraDecifra(dado[3].getBytes(), new File("chave.dummy"));
+		crypto.geraDecifra(dado[3].getBytes(), new File("C:\\Users\\Anderson\\OneDrive\\Faculdade\\3ª Ano\\Workspace\\Projeto_ARQDSIS\\chave.dummy"));
 		retorno.setCodAcesso(Integer.parseInt(new String(crypto
 				.getTextoDecifrado())));
 		return retorno;
@@ -86,8 +86,8 @@ public class LerConta {
 	
 	public boolean substituirConta(Conta conta) throws Exception {
 
-		String arquivo = "" + conta.getNumConta();
-		String arquivoTmp = "registroConta-tmp.txt";
+		String arquivo ="C:\\Users\\Anderson\\OneDrive\\Faculdade\\3ª Ano\\Workspace\\Projeto_ARQDSIS\\chave.dummy"+ conta.getNumConta();
+		String arquivoTmp = "C:\\Users\\Anderson\\OneDrive\\Faculdade\\3ª Ano\\Workspace\\Projeto_ARQDSIS\\registroConta-tmp.txt";
 
 		BufferedWriter writer = new BufferedWriter(new FileWriter(arquivoTmp));
 		BufferedReader reader = new BufferedReader(new FileReader(arquivo));
@@ -107,8 +107,8 @@ public class LerConta {
 		writer.close();
 		reader.close();
 
-		new File(arquivo).delete();
-		new File(arquivoTmp).renameTo(new File(arquivo));
+		new File("C:\\Users\\Anderson\\OneDrive\\Faculdade\\3ª Ano\\Workspace\\CaixaEletronico\\"+arquivo).delete();
+		new File(arquivoTmp).renameTo(new File("C:\\Users\\Anderson\\OneDrive\\Faculdade\\3ª Ano\\Workspace\\CaixaEletronico\\" + arquivo));
 		return true;
 	}
 }
