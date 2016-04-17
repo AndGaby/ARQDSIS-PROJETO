@@ -62,7 +62,7 @@ public class Movimento{
 		log.setValor(getValorDaOperacao());
 		log.setOperacao(tipo);
 
-//		log.incluir();		
+		log.incluir();		
 	}
 
 	public  ArrayList<Log>  consultarExtratoDias(Date dataInicial, Date dataFinal) throws SQLException{

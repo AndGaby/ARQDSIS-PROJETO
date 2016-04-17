@@ -33,6 +33,7 @@ public class SaqueCTRL extends HttpServlet {
 	}
 
 	/**
+	 * @throws IOException 
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
@@ -43,8 +44,7 @@ public class SaqueCTRL extends HttpServlet {
 		String parameter = request.getParameter("valor");
 		request.setAttribute("conta", Conta.conta);
 		request.setAttribute("resposta", sucesso);
-
-		
+	
 		if (parameter != null) {
 			
 			Saque saque = new Saque();

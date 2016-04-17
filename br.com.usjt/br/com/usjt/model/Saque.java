@@ -1,7 +1,10 @@
 package br.com.usjt.model;
 
+import java.io.IOException;
 import java.util.Date;
+
 import javax.swing.JOptionPane;
+
 import br.com.usjt.DAO.ContaDAO;
 import br.com.usjt.TO.ContaTO;
 import br.com.usjt.TO.MovimentoTO;
@@ -13,7 +16,7 @@ public class Saque extends Movimento {
 	private Double saque;
 
 	public Saque() {
-		// TODO Auto-generated constructor stub
+		dispenser = new Dispenser();
 	}
 
 	public Saque(Movimento movimento) {
@@ -29,15 +32,18 @@ public class Saque extends Movimento {
 		this.saque = saque;
 	}
 
-	public boolean fazerSaque(Conta conta, double valorSacar){
+	public boolean fazerSaque(Conta conta, double valorSacar) throws IOException {
 		ContaDAO contaDAO = new ContaDAO();
 		SaqueTO saqueTO = new SaqueTO();
 		ContaTO contaTO = contaDAO.selectSaldo(conta.getNumConta());
+		
+		saqueTO.setSaque(contaTO.getSaldo());
 
 		double saldoAtual = contaTO.getSaldo();
-		boolean teste; //variavel para teste no junit
 
+		boolean teste; //variavel para teste no junit
 		if(saldoAtual >= valorSacar){
+			
 			dispenser.contarNotas(valorSacar);
 
 			double novosaldo = saldoAtual - valorSacar;
@@ -68,6 +74,6 @@ public class Saque extends Movimento {
 			JOptionPane.showMessageDialog(null, "Saldo insuficiente para saque");
 			teste = false;
 		}
-		return teste;
+		return true;
 	}
 }

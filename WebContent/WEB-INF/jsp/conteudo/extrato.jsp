@@ -18,7 +18,7 @@
 		<%@ include file="menu-lateral.jsp"%>
 		<div class="conteudo col-md-10">
 			<div class="col-md-12">
-				<h2 class="conteudo-titulo">Extrato</h2>
+				<h2 class="conteudo-titulo">extrato</h2>
 			</div>
 			<form action="./extrato" method="POST">
 				<div class=col-md-9>

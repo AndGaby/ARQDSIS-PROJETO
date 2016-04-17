@@ -2,6 +2,8 @@ package br.com.usjt.Test;
 
 import static org.junit.Assert.assertEquals;
 
+import java.io.IOException;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -24,7 +26,7 @@ public class SaqueTest {
 	}
 
 	@Test
-	public void fazerSaque() {
+	public void fazerSaque() throws IOException {
 		assertEquals("testa se o saldo da conta retornado é 20000.0", true, saque.fazerSaque(conta, 200));
 	}
 }
