@@ -40,15 +40,17 @@ public class SaqueCTRL extends HttpServlet {
 
 		RequestDispatcher dispatcher;
 		Boolean sucesso = false;
-		String valorSacar = request.getParameter("valor");
+		String parameter = request.getParameter("valor");
 		request.setAttribute("conta", Conta.conta);
 		request.setAttribute("resposta", sucesso);
 
-		if (valorSacar != null) {
+		
+		if (parameter != null) {
 			
 			Saque saque = new Saque();
+			Double valorDoSaque = Double.parseDouble(parameter);
 			
-			if (saque.fazerSaque(Double.parseDouble(valorSacar), Conta.conta)) {
+			if (saque.fazerSaque(Conta.conta, valorDoSaque)) {
 				sucesso = true;
 			}
 

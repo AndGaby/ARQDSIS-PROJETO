@@ -13,7 +13,7 @@ import br.com.usjt.Factory.ConnectionFactory;
 import br.com.usjt.TO.ContaTO;
 import br.com.usjt.TO.MovimentoTO;
 
-public class Movimento extends Observable{
+public class Movimento{
 	private int codigoMovimento;
 	private Date dataDoMovimento;
 	private double valorDaOperacao;
@@ -25,8 +25,6 @@ public class Movimento extends Observable{
 
 	public void setCodigoMovimento(int codigoMovimento) {
 		this.codigoMovimento = codigoMovimento;
-		setChanged();
-		notifyObservers();
 	}
 
 
@@ -36,8 +34,6 @@ public class Movimento extends Observable{
 
 	public void setDataDoMovimento(Date dataDoMovimento) {
 		this.dataDoMovimento = dataDoMovimento;
-		setChanged();
-		notifyObservers();
 	}
 
 	public double getValorDaOperacao() {
@@ -46,8 +42,6 @@ public class Movimento extends Observable{
 
 	public void setValorDaOperacao(double valorDaOperacao) {
 		this.valorDaOperacao = valorDaOperacao;
-		setChanged();
-		notifyObservers();
 	}
 
 	public void geraMovimento(ContaTO contaTO, MovimentoTO movimentoTO, ContaTO contaTODestino, String tipo){

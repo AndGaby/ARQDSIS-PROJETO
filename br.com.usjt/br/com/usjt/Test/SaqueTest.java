@@ -25,6 +25,6 @@ public class SaqueTest {
 
 	@Test
 	public void fazerSaque() {
-		assertEquals("testa se o saldo da conta retornado é 20000.0", true, saque.fazerSaque(200, conta));
+		assertEquals("testa se o saldo da conta retornado é 20000.0", true, saque.fazerSaque(conta, 200));
 	}
 }

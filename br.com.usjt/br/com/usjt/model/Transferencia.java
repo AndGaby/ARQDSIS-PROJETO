@@ -27,8 +27,7 @@ public class Transferencia extends Movimento{
 
 	public void setAgenciaDestino(int agenciaDestino) {
 		this.agenciaDestino = agenciaDestino;
-		setChanged();
-		notifyObservers();
+
 	}
 
 	public int getConta() {
@@ -45,8 +44,6 @@ public class Transferencia extends Movimento{
 
 	public void setContaDestino(int contaDestino) {
 		this.contaDestino = contaDestino;
-		setChanged();
-		notifyObservers();
 	}
 
 	public void fazeTransferencia() throws SQLException, NumberFormatException, IOException, ClassNotFoundException{

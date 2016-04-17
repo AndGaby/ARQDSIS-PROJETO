@@ -64,6 +64,7 @@ public class AcessoCTRL extends HttpServlet {
 					if (acesso.validar(conta) == true) {
 						dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/conteudo/home.jsp");
 						Conta.conta = conta;
+						Conta.conta.setNome(conta.recuperarNome());
 						request.setAttribute("conta", Conta.conta);
 					} else {
 						error = true;

@@ -6,7 +6,7 @@ import javax.swing.JOptionPane;
 import br.com.usjt.DAO.DispenserDAO;
 import br.com.usjt.TO.DispenserTO;
 
-public class Dispenser extends Observable{
+public class Dispenser{
 
 	private int nota, quantidade;
 
@@ -28,15 +28,10 @@ public class Dispenser extends Observable{
 
 	public void setNota(int nota) {
 		this.nota = nota;
-		setChanged();
-		notifyObservers();
-
 	}
 
 	public void setQuantidade(int quantidade) {
 		this.quantidade = quantidade;
-		setChanged();
-		notifyObservers();
 	}
 
 	public boolean contarNotas(double valorRetirar){

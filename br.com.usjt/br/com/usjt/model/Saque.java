@@ -27,11 +27,9 @@ public class Saque extends Movimento {
 
 	public void setSaque(Double saque) {
 		this.saque = saque;
-		setChanged();
-		notifyObservers();
 	}
 
-	public boolean fazerSaque(double valorSacar, Conta conta){
+	public boolean fazerSaque(Conta conta, double valorSacar){
 		ContaDAO contaDAO = new ContaDAO();
 		SaqueTO saqueTO = new SaqueTO();
 		ContaTO contaTO = contaDAO.selectSaldo(conta.getNumConta());

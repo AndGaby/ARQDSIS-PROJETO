@@ -6,7 +6,7 @@ import java.util.Observable;
 import br.com.usjt.DAO.LogDAO;
 import br.com.usjt.TO.LogTO;
 
-public class Log extends Observable{
+public class Log{
 	private int codigoItemLog, agencia, conta, codigoCliente, codigoMovimento, agenciaDestino, contaDestino;
 	private Date dataOperacao;
 	private double valor;
@@ -17,8 +17,6 @@ public class Log extends Observable{
 	}
 	public void setCodigoItemLog(int codigoItemLog) {
 		this.codigoItemLog = codigoItemLog;
-		setChanged();
-		notifyObservers();
 	}
 
 	public int getAgencia() {
@@ -26,32 +24,24 @@ public class Log extends Observable{
 	}
 	public void setAgencia(int agencia) {
 		this.agencia = agencia;
-		setChanged();
-		notifyObservers();
 	}
 	public int getConta() {
 		return conta;
 	}
 	public void setConta(int conta) {
 		this.conta = conta;
-		setChanged();
-		notifyObservers();
 	}
 	public Date getDataOperacao() {
 		return dataOperacao;
 	}
 	public void setDataOperacao(Date dataOperacao) {
 		this.dataOperacao = dataOperacao;
-		setChanged();
-		notifyObservers();
 	}
 	public double getValor() {
 		return valor;
 	}
 	public void setValor(double valor) {
 		this.valor = valor;
-		setChanged();
-		notifyObservers();
 	}
 
 	public int getCodigoCliente() {
@@ -60,8 +50,6 @@ public class Log extends Observable{
 
 	public void setCodigoCliente(int codigoCliente) {
 		this.codigoCliente = codigoCliente;
-		setChanged();
-		notifyObservers();
 	}
 
 	public int getCodigoMovimento() {
@@ -70,8 +58,6 @@ public class Log extends Observable{
 
 	public void setCodigoMovimento(int codMovimento) {
 		this.codigoMovimento = codMovimento;
-		setChanged();
-		notifyObservers();
 	}
 
 
@@ -81,8 +67,6 @@ public class Log extends Observable{
 
 	public void setOperacao(String operacao) {
 		this.operacao = operacao;
-		setChanged();
-		notifyObservers();
 	}
 
 	public int getContaDestino() {
@@ -91,8 +75,6 @@ public class Log extends Observable{
 
 	public void setContaDestino(int contaDestino) {
 		this.contaDestino = contaDestino;
-		setChanged();
-		notifyObservers();
 	}
 
 	public int getAgenciaDestino() {
@@ -101,8 +83,6 @@ public class Log extends Observable{
 
 	public void setAgenciaDestino(int agenciaDestino) {
 		this.agenciaDestino = agenciaDestino;
-		setChanged();
-		notifyObservers();
 	}
 
 	public void incluir(){

@@ -11,7 +11,7 @@ import javax.swing.JOptionPane;
 import br.com.usjt.DAO.ContaDAO;
 import br.com.usjt.TO.ContaTO;
 
-public class Conta extends Observable{
+public class Conta {
 	public static Conta conta;
 	private int agencia, saldo, numConta, codAcesso, senha;
 	private String nome;
@@ -34,8 +34,6 @@ public class Conta extends Observable{
 
 	public void setAgencia(int agencia) {
 		this.agencia = agencia;
-		setChanged();
-		notifyObservers();
 	}
 
 	public int getNumConta() {
@@ -44,8 +42,6 @@ public class Conta extends Observable{
 
 	public void setNumConta(int numConta) {
 		this.numConta = numConta;
-		setChanged();
-		notifyObservers();
 	}
 
 	public int getSaldo() {
@@ -54,8 +50,6 @@ public class Conta extends Observable{
 
 	public void setSaldo(int saldo) {
 		this.saldo = saldo;
-		setChanged();
-		notifyObservers();
 	}
 
 	public int getCodAcesso() {
@@ -64,8 +58,6 @@ public class Conta extends Observable{
 
 	public void setCodAcesso(int codAcesso) {
 		this.codAcesso = codAcesso;
-		setChanged();
-		notifyObservers();
 	}
 
 	
@@ -75,8 +67,11 @@ public class Conta extends Observable{
 
 	public void setSenha(int senha) {
 		this.senha = senha;
-		setChanged();
-		notifyObservers();
+	}
+	
+	public String recuperarNome(){
+		ContaDAO contaDAO = new ContaDAO();
+		return contaDAO.innerJoin(getNumConta());
 	}
 
 	public String consultarSaldo(){		

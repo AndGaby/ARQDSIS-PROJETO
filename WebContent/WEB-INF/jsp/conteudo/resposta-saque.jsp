@@ -31,7 +31,7 @@
 			<c:if test="${not sucesso}">
 				<div class="row">
 					<div class="col-md-4 col-md-offset-4">
-						<p class="text-danger">Ocorreu error.</p>
+						<p class="text-danger">Ocorreu um erro.</p>
 					</div>
 				</div>
 			</c:if>

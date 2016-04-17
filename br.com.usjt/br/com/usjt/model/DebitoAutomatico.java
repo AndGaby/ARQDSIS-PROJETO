@@ -11,7 +11,7 @@ import br.com.usjt.TO.ContaTO;
 import br.com.usjt.TO.DebitoAutomaticoTO;
 import br.com.usjt.TO.MovimentoTO;
 
-public class DebitoAutomatico extends Observable{
+public class DebitoAutomatico{
 
 	private int codigoConsumidor, codDebito;
 	private String operadora, tipoDebito;
@@ -33,24 +33,18 @@ public class DebitoAutomatico extends Observable{
 	}
 	public void setTipoDebito(String tipoDebito) {
 		this.tipoDebito = tipoDebito;
-		setChanged();
-		notifyObservers();
 	}
 	public String getOperadora() {
 		return operadora;
 	}
 	public void setOperadora(String operadora) {
 		this.operadora = operadora;
-		setChanged();
-		notifyObservers();
 	}
 	public int getCodigoConsumidor() {
 		return codigoConsumidor;
 	}
 	public void setCodigoConsumidor(int codigoConsumidor) {
 		this.codigoConsumidor = codigoConsumidor;
-		setChanged();
-		notifyObservers();
 	}
 	public Date getDataDebito() {
 		return dataDebito;
