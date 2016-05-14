@@ -1,7 +1,6 @@
 package br.com.usjt.controller;
 
 
-import java.awt.List;
 import java.io.IOException;
 import java.time.LocalDate;
 
@@ -11,7 +10,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import br.com.usjt.model.Conta;
 
 /**
@@ -28,7 +26,22 @@ public class ExtratoCTRL extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		doPost(request, response);
+
+		request.setCharacterEncoding("utf-8");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/conteudo/extrato.jsp");
+		
+		
+	    String chave = request.getParameter("data[search]");
+//		Vendedor vendedor = new Vendedor();
+//		ListaDeClientes lista;
+//		if(chave != null && chave.length() > 0){
+//			lista = vendedor.listarClientes(chave);
+//		} else {
+//			lista = vendedor.listarClientes();
+//		}
+//		request.setAttribute("lista", lista);
+	
+	dispatcher.forward(request, response);
 	}
 
 	/**
@@ -37,33 +50,5 @@ public class ExtratoCTRL extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/conteudo/extrato.jsp");
-
-		String parData = request.getParameter("data");
-		String parDataFim = request.getParameter("dataFim");
-
-		request.setAttribute("conta", Conta.conta);
-		request.setAttribute("dataAtual", LocalDate.now());
-
-		if (parData != null) {
-
-			LocalDate inicial = LocalDate.parse(parData);
-			LocalDate fim;
-
-			if(parDataFim == null)
-				fim = LocalDate.now();
-			else
-				fim = LocalDate.parse(parDataFim);
-
-			//			extrato = new Extrato(ContaLogada.conta, inicial, fim);
-			//			extrato.recuperarTodosRegistrosDeOperacoes();
-			//			List<RegistroDeOperacao> listaRegistro = extrato.getListaRegistro();
-
-			//			request.setAttribute("registros", listaRegistro);
-		}
-
-		dispatcher.forward(request, response);
-
 	}	
 }
