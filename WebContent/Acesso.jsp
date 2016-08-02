@@ -16,7 +16,8 @@
 	<c:if test="${error}">
 		<div class="row">
 			<div class="col-md-4 col-md-offset-4">
-				<p class="text-danger msg-error">Dados inválidos, por favor tente novamente.</p>
+				<p class="text-danger msg-error">Dados inválidos, por favor
+					tente novamente.</p>
 			</div>
 		</div>
 	</c:if>
@@ -25,7 +26,10 @@
 		<div class="row">
 			<div class="div-principal col-md-3 col-md-offset-4">
 				<h1>Acesso</h1>
-				<form action="Acesso.do" method="POST">
+				<form action="controller.do" method="POST">
+
+
+
 					<div class="form-group">
 						<label for="agencia">Agência:</label> <input class="form-control"
 							name="agencia" id="agencia" placeholder="Digite sua agência">
@@ -39,7 +43,15 @@
 							class="form-control" name="senha" id="pwd"
 							placeholder="Digite sua senha">
 					</div>
-					<input  type="submit" name="OK" value="OK" >
+					
+					
+					<div id="actions" class="row">
+						<div class="col-md-12">
+							<button type="submit" class="btn btn-primary" name="command"
+								value="AcessoCommand">OK</button>
+							<a href="Acesso.jsp" class="btn btn-default">Cancelar</a>
+						</div>
+					</div>
 				</form>
 			</div>
 		</div>

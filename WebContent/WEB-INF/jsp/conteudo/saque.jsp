@@ -21,6 +21,8 @@
 				<h2 class="conteudo-titulo">Saque</h2>
 			</div>
 			<div class="col-md-12 conteudo-saque">
+			
+			
 				<form action="Saque" method="POST">
 					<div class="col-md-3 botao-esquerda">
 						<button class="btn-lg btn-default" value="10" name="valor">R$
@@ -42,12 +44,10 @@
 							200,00</button>
 						<button class="btn-lg btn-default" value="500" name="valor">R$
 							500,00</button>
-
 					</div>
 				</form>
 			</div>
 		</div>
 	</div>
-
 </body>
 </html>

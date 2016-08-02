@@ -25,7 +25,7 @@
 		<div class="row">
 			<div class="div-principal col-md-3 col-md-offset-4">
 				<h1>Acesso</h1>
-				<form action="Acesso.do" method="POST">
+				<form action="controller.do" method="POST">
 					<div class="form-group">
 						<label for="agencia">Agência:</label> <input class="form-control"
 							name="agencia" id="agencia" placeholder="Digite sua agência">
@@ -33,13 +33,13 @@
 					<div class="form-group">
 						<label for="conta">Conta:</label> <input class="form-control"
 							name="conta" id="conta" placeholder="Digite sua conta">
+						<div id="actions" class="row">
+						<div class="col-md-12">
+							<button type="submit" class="btn btn-primary" name="command"
+								value="AcessoCommand">OK</button>
+							<a href="Acesso.jsp" class="btn btn-default">Cancelar</a>
+						</div>
 					</div>
-					<div class="form-group">
-						<label for="pwd">Password:</label> <input type="password"
-							class="form-control" name="senha" id="pwd"
-							placeholder="Digite sua senha">
-					</div>
-					<input  type="submit" name="OK" value="OK" >
 				</form>
 			</div>
 		</div>
